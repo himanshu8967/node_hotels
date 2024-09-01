@@ -1,0 +1,15 @@
+const data = req.body; // Accessing the request body correctly
+
+  // Create a new person document using the mongoose model
+  const newPerson = new Person(data);
+
+  // Save the person to the database
+  newPerson.save((error, savedPerson) => { // Correcting the save function callback
+    if (error) {
+      console.log('Error saving person:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.status(201).json({ message: 'Person added successfully', person: savedPerson });
+    }
+  });
+});
